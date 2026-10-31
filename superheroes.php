@@ -63,10 +63,39 @@ $superheroes = [
   ], 
 ];
 
+/* exercise 3 - get the search text from the url e.g. superheroes.php?query=Ironman */
+/* if there is no query in the url use an empty string */
+$query = isset($_GET['query']) ? $_GET['query'] : "";
+
+/* sanitize - take off extra spaces and turn things like < > into safe text */
+/* this stops anyone from injecting code into the page */
+$query = htmlspecialchars(trim($query), ENT_QUOTES, 'UTF-8');
+
+/* look for a superhero whose name or alias matches - strcasecmp ignores upper/lower case */
+$matches = array_filter($superheroes, function ($superhero) use ($query) {
+    return strcasecmp($superhero['name'], $query) === 0 ||
+           strcasecmp($superhero['alias'], $query) === 0;
+});
+
 ?>
 
+<?php if ($query === ""): ?>
+<!-- nothing typed - show the full list like exercise 1 -->
 <ul>
 <?php foreach ($superheroes as $superhero): ?>
-  <li><?= $superhero['alias']; ?></li>
+  <li><?= htmlspecialchars($superhero['alias']); ?></li>
 <?php endforeach; ?>
 </ul>
+
+<?php elseif (count($matches) > 0): ?>
+<!-- found - alias in h3, name in h4, biography in p -->
+<?php $hero = reset($matches); /* reset gets the first match */ ?>
+<h3><?= htmlspecialchars($hero['alias']); ?></h3>
+<h4>A.K.A <?= htmlspecialchars($hero['name']); ?></h4>
+<p><?= htmlspecialchars($hero['biography']); ?></p>
+
+<?php else: ?>
+<!-- no match - show the not found message -->
+<p class="not-found">Superhero not found</p>
+
+<?php endif; ?>

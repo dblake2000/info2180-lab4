@@ -18,8 +18,15 @@
 
         <h1>Superhero Search</h1>
 
-        <!-- clicking this shows the list of superheroes in an alert -->
-        <button type="button" class="btn">Search</button>
+        <!-- search form - text field and button -->
+        <form id="search-form">
+            <label for="search">Search by name or alias</label>
+            <input type="text" id="search" name="search" placeholder="e.g. Ironman or Tony Stark">
+            <button type="submit" class="btn">Search</button>
+        </form>
+
+        <!-- the results from superheroes.php go in here -->
+        <div id="result"></div>
 
     </main>
 

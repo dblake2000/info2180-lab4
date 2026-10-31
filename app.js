@@ -1,16 +1,29 @@
-/* lab 4 - superhero search (exercise 2) */
-
-/* wait for the page to load - script is in the head so the button doesn't exist yet */
+/* wait for the page to load - script is in the head so the form doesn't exist yet */
 window.addEventListener("DOMContentLoaded", function () {
 
-    /* the search button */
-    const searchBtn = document.querySelector(".btn");
+    /* the search form */
+    const form = document.getElementById("search-form");
 
-    /* click - get the list of superheroes */
-    searchBtn.addEventListener("click", function () {
+    /* the text field the user types in */
+    const searchField = document.getElementById("search");
+
+    /* the div where the results go */
+    const resultDiv = document.getElementById("result");
+
+    /* search - runs when the button is clicked (or enter is pressed) */
+    form.addEventListener("submit", function (event) {
+
+        /* stop the form from reloading the page */
+        event.preventDefault();
+
+        /* get what the user typed - trim takes off extra spaces */
+        const query = searchField.value.trim();
+
+        /* encodeURIComponent makes the text safe to put in the url */
+        const url = "superheroes.php?query=" + encodeURIComponent(query);
 
         /* ajax request to superheroes.php */
-        fetch("superheroes.php")
+        fetch(url)
             .then(function (response) {
 
                 /* something went wrong on the server */
@@ -23,13 +36,13 @@ window.addEventListener("DOMContentLoaded", function () {
             })
             .then(function (data) {
 
-                /* show the list in an alert */
-                alert(data);
+                /* put the html from php inside the result div */
+                resultDiv.innerHTML = data;
             })
             .catch(function (error) {
 
-                /* let the user know it didn't work */
-                alert("There was a problem getting the superheroes.");
+                /* show a message if the request didn't work */
+                resultDiv.textContent = "There was a problem getting the superheroes.";
                 console.log(error);
             });
     });
