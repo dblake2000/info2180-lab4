@@ -1,0 +1,86 @@
+/* lab 4 - superhero search styles */
+
+/* whole page - background and font */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 20px;
+}
+
+/* the main white box in the middle */
+.container {
+    max-width: 600px;
+    margin: 40px auto;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* page heading */
+h1 {
+    margin-top: 0;
+    color: #b11313;
+}
+
+/* label sits on its own line above the text field */
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+/* the search text field */
+#search {
+    width: 70%;
+    padding: 10px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+/* search button */
+.btn {
+    padding: 10px 20px;
+    background-color: #b11313;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* button hover - slightly darker */
+.btn:hover {
+    background-color: #8a0e0e;
+}
+
+/* the result box - space above it */
+#result {
+    margin-top: 25px;
+}
+
+/* list of superheroes */
+#result ul {
+    padding-left: 20px;
+    line-height: 1.8;
+}
+
+/* superhero alias */
+#result h3 {
+    margin-bottom: 0;
+    color: #b11313;
+}
+
+/* superhero real name */
+#result h4 {
+    margin-top: 5px;
+    color: #555555;
+}
+
+/* not found message */
+#result .not-found {
+    color: #b11313;
+    font-weight: bold;
+}
